@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lk.iml" filepath="$PROJECT_DIR$/lk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lkcommons/lkcommons.iml" filepath="$PROJECT_DIR$/lkcommons/lkcommons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lkcontroller/lkcontroller.iml" filepath="$PROJECT_DIR$/lkcontroller/lkcontroller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lkdao/lkdao.iml" filepath="$PROJECT_DIR$/lkdao/lkdao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lkservice/lkservice.iml" filepath="$PROJECT_DIR$/lkservice/lkservice.iml" />
+    </modules>
+  </component>
+</project>

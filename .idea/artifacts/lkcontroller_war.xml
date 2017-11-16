@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lkcontroller:war">
+    <output-path>$PROJECT_DIR$/lkcontroller/target</output-path>
+    <root id="archive" name="lk.controller.war">
+      <element id="artifact" artifact-name="lkcontroller:war exploded" />
+    </root>
+  </artifact>
+</component>
