@@ -4,11 +4,9 @@ import com.lk.entity.Cla;
 import com.lk.entity.Student;
 import com.lk.entity.User;
 import com.lk.service.ClaService;
+import com.lk.service.TeacherService;
 import com.lk.service.UserService;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Controller
 
@@ -182,5 +180,14 @@ public class UserController {
 
      }
 
+     @Autowired
+     private TeacherService teacherService;
+      @ResponseBody
+    @RequestMapping("/selTeacher")
+     public String selTeacher(HttpServletRequest request,HttpServletResponse response){
+          response.setContentType("application/json;charset=UTF-8");
+          return teacherService.selTeacher(1);
 
+
+     }
 }

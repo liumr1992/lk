@@ -4,18 +4,39 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-4.3.xsd
          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
          http://www.springframework.org/schema/tx
-         http://www.springframework.org/schema/tx/spring-tx.xsd">
+          http://www.springframework.org/schema/tx/spring-tx.xsd
+
+        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+
+          ">
 
 
 
-    <context:component-scan base-package=" com.lk.dao,com.lk.service"></context:component-scan>
+   <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+    <jaxws:endpoint
+    id="TeacherService"
+    implementor="com.lk.serviceimpl.TeacherServiceImpl"
+    address="/teacherService"
+    />
+    <jaxws:endpoint id="UserService"
+    implementor="com.lk.serviceimpl.UserServiceImpl"
+    address="/userService"
+    />
+    <bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <property name="defaultUri" value="http://localhost:8080/webService/teacherService"/>
+    </bean>
+
+    
+    <context:component-scan base-package=" com.lk.dao,com.lk.service,com.lk.serviceimpl"></context:component-scan>
+    
 
     <!-- 导入资源文件 -->
     <context:property-placeholder location="classpath:db.properties"/>
@@ -75,6 +96,7 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dynamicDataSource"></property>
     </bean>
+
 
     <!-- 启用事务注解 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>

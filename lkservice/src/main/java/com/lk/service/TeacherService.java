@@ -7,7 +7,7 @@ import javax.jws.WebService;
 
 
 
-@WebService
+@WebService()
 public interface TeacherService {
     @WebMethod
     public String selTeacher(int id);

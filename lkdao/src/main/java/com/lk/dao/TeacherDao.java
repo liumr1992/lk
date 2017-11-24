@@ -12,7 +12,7 @@ public class TeacherDao {
     private JdbcTemplate jdbcTemplate;
     public String selTeacher(int id){
         String sql="select name from teacher where id=?";
-        return (String)jdbcTemplate.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper(Teacher.class));
+        return ((Teacher)jdbcTemplate.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper(Teacher.class))).getName();
 
     }
 }
