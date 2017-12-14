@@ -1,14 +1,17 @@
 package com.lk.controller;
 
-import com.lk.entity.Cla;
-import com.lk.entity.Student;
-import com.lk.entity.User;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.lk.entity.*;
 import com.lk.service.ClaService;
 import com.lk.service.TeacherService;
 import com.lk.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -18,18 +21,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Controller
+@RestController
 
 public class UserController {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private RestTemplate restTemplate;
     private User user;
     private Cla cla;
     @Resource
     private ClaService cService;
 
-    @RequestMapping("/userLogin")
+    @RequestMapping(value = "/userLogin")
     public ModelAndView userLogin(String name, String password) {
 
         User user = new User();
@@ -56,8 +60,8 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/delUser")
-    @ResponseBody
+
+    @RequestMapping(value = "/user",method =RequestMethod.DELETE )
     public String delUser(String uid) {
         int n = userService.delUser(Integer.parseInt(uid));
         System.out.println(n);
@@ -147,8 +151,7 @@ public class UserController {
 
     }
 
-    @RequestMapping("/update1")
-    @ResponseBody
+    @RequestMapping(value = "/user",method = RequestMethod.PUT)
     public String update1(@RequestParam("id") int id, @RequestParam("name") String name, String password, @RequestParam("sex") int sex) {
         System.out.println(id + "" + name + "" + "" + password + "" + sex);
         User user = new User();
@@ -165,9 +168,9 @@ public class UserController {
 
 
     }
-     @RequestMapping("/addUser")
+     @RequestMapping(value = "/user/{id}",method =RequestMethod.POST)
      @ResponseBody
-      public int addUser(@RequestParam("id") int id,String name,String password,@RequestParam("sex") int sex){
+      public int addUser(@PathVariable("id") int id,String name,String password,@RequestParam("sex") int sex){
         User user=new User();
         user.setId(id);
         user.setName(name);
@@ -189,5 +192,22 @@ public class UserController {
           return teacherService.selTeacher(1);
 
 
+     }
+
+
+     @RequestMapping("/getApi")
+
+
+    public String  getApi(){
+
+         Gson gson=new Gson();
+         String a=gson.fromJson( restTemplate.getForObject("http://localhost:8080/member/15097190588",Object.class).toString(),MyResponse.class).getObject().toString();
+         Member member=gson.fromJson(a,Member.class);
+         System.out.println(member.getName());
+         System.out.println(restTemplate.getForEntity("http://localhost:8080/member/15097190588",Object.class).getBody().toString());
+
+         System.out.println(gson.fromJson( restTemplate.getForObject("http://localhost:8080/member/15097190588",Object.class).toString(),MyResponse.class).getObject().toString()+"\t"+gson.fromJson( restTemplate.getForObject("http://localhost:8080/member/15097190588",Object.class).toString(),MyResponse.class).getStatus());
+
+         return  restTemplate.getForEntity("http://localhost:8080/member/15097190588",Object.class).toString();
      }
 }

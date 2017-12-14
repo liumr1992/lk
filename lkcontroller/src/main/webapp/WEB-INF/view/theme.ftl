@@ -9,7 +9,7 @@
         #tid {
             border: solid 1px;
             background-color: white;
-          color: black;
+          color: #60e38c;
         }
         a {
             text-decoration: none
@@ -27,9 +27,10 @@
 
 
                 $.ajax({
-                            url: "/update1",
+                            url: "/user",
                             type: "POST",
                             data: {
+                                _method:'put',
                                 id:id,
                                 name:name,
                                 password:pwd,
@@ -78,10 +79,11 @@
                  var id2=$("#id2").val();
                  $.ajax(
                      {
-                         url:"/delUser",
+                         url:"/user",
                          type:"POST",
                          data:{
-                         uid:id2
+                             _method:'delete',
+                             uid:id2
                           },
                          success:function (result) {
                              location.reload();
@@ -104,7 +106,7 @@
               var sex=$("input[name='classify3']:checked").val();
              $.ajax(
                  {
-                     url:"/addUser",
+                     url:"/user/"+id,
                      type:"Post",
                      data:{
                       id:id,

@@ -1,5 +1,8 @@
 package com.lk.entity;
 
+import com.sun.xml.internal.txw2.annotation.XmlElement;
+
+@XmlElement()
 public class Student {
 
     private int id;

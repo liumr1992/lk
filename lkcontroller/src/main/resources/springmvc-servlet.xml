@@ -66,8 +66,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
         <property name="exposeSessionAttributes" value="true" />
         <!-- 使用这些宏，必须设置FreeMarkerViewResolver的exposeMacroHelpers属性为true -->
         <property name="exposeSpringMacroHelpers" value="true" />
-    </bean>
 
+    </bean>
 
 
 
